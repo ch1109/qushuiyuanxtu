@@ -54,7 +54,8 @@ src/
 - *暂无*
 
 ## 6. ✅ 待办清单
-- [ ] 初始化项目脚手架
+- [x] 初始化项目脚手架
 - [ ] 配置 Eslint & Prettier
 - [ ] 封装 Request 网络请求 (拦截器, Token注入)
 - [ ] 搭建多环境配置 (Dev/Prod)
+- [x] 部署到 GitHub (https://github.com/ch1109/qushuiyuanxtu.git)
