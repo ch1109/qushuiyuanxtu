@@ -1,0 +1,239 @@
+.page-scan {
+    height: 100vh;
+    width: 100vw;
+    background: #1a2a3a;
+    position: relative;
+    overflow: hidden;
+    color: #fff;
+
+    /* Wave Animation Background */
+    .wave-bg {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 40%;
+        background: linear-gradient(180deg, rgba(0, 102, 255, 0.4) 0%, rgba(0, 50, 150, 0.8) 100%);
+        transition: height 0.5s;
+
+        &.active {
+            height: 60%; // Rise up when pouring
+        }
+
+        .wave {
+            position: absolute;
+            top: -100px;
+            left: -50%;
+            width: 200%;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 40%;
+            animation: drift 10s infinite linear;
+
+            &.wave2 {
+                top: -120px;
+                animation-duration: 12s;
+                opacity: 0.5;
+            }
+        }
+    }
+
+    .content {
+        position: relative;
+        z-index: 10;
+        padding: 100px 24px 0;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .dashboard {
+        width: 100%;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+
+        .quality-row {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+
+            .item {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                .val {
+                    font-size: 24px;
+                    font-weight: bold;
+                    margin-bottom: 4px;
+                }
+
+                .label {
+                    font-size: 12px;
+                    color: rgba(255, 255, 255, 0.6);
+                }
+
+                .ok {
+                    color: var(--success-color);
+                }
+            }
+
+            .divider {
+                width: 1px;
+                height: 30px;
+                background: rgba(255, 255, 255, 0.1);
+            }
+        }
+
+        .promotion-banner {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--accent-color);
+            font-size: 13px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .icon-gift {
+                margin-right: 6px;
+                font-size: 16px;
+            }
+        }
+    }
+
+    .main-display {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        .unit {
+            font-size: 14px;
+            opacity: 0.7;
+            margin-bottom: 8px;
+        }
+
+        .volume {
+            font-size: 72px;
+            font-weight: bold;
+            font-family: monospace;
+        }
+
+        .cost {
+            font-size: 18px;
+            margin-top: 12px;
+            color: var(--secondary-color);
+        }
+    }
+
+    .control-area {
+        margin-bottom: 60px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .btn-water {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: rgba(0, 102, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            touch-action: none; // Prevent scroll
+
+            .inner-circle {
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                background: var(--primary-color);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                z-index: 2;
+                box-shadow: 0 10px 30px rgba(0, 102, 255, 0.4);
+                font-size: 14px;
+
+                .icon-drop {
+                    width: 24px;
+                    height: 24px;
+                    background: #fff;
+                    mask: url('data:image/svg+xml;base64,PHN2ZyB...'); // Simpler to use CSS shape or font
+                    /* Simple pure CSS drop for prototype */
+                    border-radius: 0 50% 50% 50%;
+                    transform: rotate(45deg);
+                    margin-bottom: 8px;
+                }
+            }
+
+            /* Ripple Animation */
+            .ripple {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                border-radius: 50%;
+                border: 2px solid var(--primary-color);
+                opacity: 0;
+            }
+
+            &.active {
+                .inner-circle {
+                    transform: scale(0.95);
+                }
+
+                .r1 {
+                    animation: ripple 1.5s infinite;
+                }
+
+                .r2 {
+                    animation: ripple 1.5s infinite 0.4s;
+                }
+            }
+        }
+
+        .btn-finish {
+            margin-top: 32px;
+            padding: 10px 32px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            font-size: 14px;
+        }
+    }
+
+    .tips {
+        position: absolute;
+        bottom: 30px;
+        font-size: 12px;
+        opacity: 0.5;
+    }
+}
+
+@keyframes drift {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: scale(1.8);
+        opacity: 0;
+    }
+}

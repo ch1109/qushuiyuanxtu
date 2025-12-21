@@ -1,0 +1,67 @@
+.custom-tab-bar {
+    position: fixed;
+    bottom: 8px; // 20 -> 8
+    left: 8px;
+    right: 8px;
+    height: 42px; // 64 -> ~42 (approx 0.65 scale)
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 100;
+    max-width: 360px; // Constraint relative to container
+    margin: 0 auto; // Center in the container
+
+    .tab-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+        height: 100%;
+        color: var(--text-secondary);
+        transition: all 0.3s ease;
+
+        .icon {
+            width: 16px; // 24 -> 16
+            height: 16px;
+            background-color: currentColor;
+            mask-size: cover;
+        }
+
+        .title {
+            font-size: 8px; // 10 -> 8
+            margin-top: 2px;
+        }
+
+        &.active {
+            color: var(--primary-color);
+            transform: translateY(-1px);
+        }
+
+        &.main-action {
+            position: relative;
+            top: -2px; // Adjusted to be almost inside, very slight pop
+
+            .icon {
+                width: 28px; // 56 -> 28
+                height: 28px;
+                background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+                border-radius: 50%;
+                box-shadow: 0 4px 10px rgba(0, 102, 255, 0.4);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                margin-bottom: 2px; // Space for title
+            }
+
+            // User specifically asked for the label to be visible
+            .title {
+                display: block; // Keep visible
+                color: var(--primary-color);
+                font-weight: 500;
+                font-size: 9px;
+            }
+        }
+    }
+}

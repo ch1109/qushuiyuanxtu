@@ -1,0 +1,178 @@
+.red-packet-mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .packet-card {
+        width: 300px;
+        height: 420px;
+        background: #CF2121; // Classic Red
+        border-radius: 12px;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s;
+
+        // The top curve part
+        .bg-curve {
+            position: absolute;
+            top: -100px;
+            left: -50%;
+            width: 200%;
+            height: 240px;
+            background: #E03535; // Lighter Red
+            border-radius: 50%;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 60px;
+
+            .avatar-wrapper {
+                width: 56px;
+                height: 56px;
+                border-radius: 6px;
+                background: #fff;
+                padding: 2px;
+                margin-bottom: 12px;
+
+                .avatar {
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 4px;
+                }
+            }
+
+            .username {
+                font-size: 16px;
+                color: #FBD4A0; // Gold text
+                margin-bottom: 4px;
+            }
+
+            .greeting {
+                font-size: 14px;
+                color: rgba(251, 212, 160, 0.8);
+                margin-bottom: 30px;
+            }
+
+            .blessing {
+                font-size: 22px;
+                color: #FBD4A0;
+                font-weight: bold;
+                letter-spacing: 2px;
+            }
+
+            .btn-open {
+                margin-top: 50px;
+                width: 90px;
+                height: 90px;
+                background: #FBD4A0;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+                transition: transform 0.8s;
+
+                .txt {
+                    font-size: 36px;
+                    color: #CF2121;
+                    font-weight: bold;
+                }
+
+                &.spinning {
+                    transform: rotateY(360deg);
+                }
+            }
+
+            // Opened State Styles
+            .amount-display {
+                margin-top: 40px;
+                color: #FBD4A0;
+                display: flex;
+                align-items: baseline;
+
+                .unit {
+                    font-size: 24px;
+                    font-weight: bold;
+                    margin-right: 4px;
+                }
+
+                .num {
+                    font-size: 64px;
+                    font-weight: bold;
+                }
+            }
+
+            .result-actions {
+                margin-top: auto;
+                margin-bottom: 60px;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                .note {
+                    font-size: 12px;
+                    color: rgba(251, 212, 160, 0.6);
+                    margin-bottom: 20px;
+                }
+
+                .btn-use {
+                    width: 200px;
+                    background: transparent;
+                    border: 1px solid rgba(251, 212, 160, 0.5);
+                    color: #FBD4A0;
+                    font-size: 14px;
+                    border-radius: 20px;
+                }
+            }
+        }
+
+        // Opened Transformation: Hide Top Curve
+        &.opened {
+            .bg-curve {
+                top: -200px; // Move up out of view or change shape
+                transition: top 0.5s;
+            }
+
+            .content {
+                padding-top: 40px;
+            }
+        }
+
+        // Close Button outside bottom
+        .close-btn {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 30px;
+            // In design, close button might be subtle inside or separate outside
+            // Let's put it as a clear X icon at bottom of card
+            z-index: 10;
+
+            .icon-close {
+                color: rgba(255, 255, 255, 0.4);
+                font-size: 24px;
+                font-weight: 300;
+            }
+        }
+    }
+}

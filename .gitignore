@@ -1,0 +1,24 @@
+# MCP 配置文件（包含敏感信息）
+.mcp.json
+
+# Claude Code 本地配置
+.claude/settings.local.json
+
+# 依赖
+node_modules/
+.npm/
+
+# 环境变量
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+
+# 系统文件
+.DS_Store
+
+# Local backups
+.git_backup
+**/.git_backup

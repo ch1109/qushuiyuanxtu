@@ -1,0 +1,257 @@
+.page-checkout {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #F5F7FA;
+    overflow: hidden; // Prevent outer scroll
+    max-width: 375px;
+    margin: 0 auto;
+    position: relative;
+    padding: 0; // Remove body padding, moved to scroll view
+
+    .custom-header {
+        flex-shrink: 0;
+        position: relative; // Static flow
+        width: 100%;
+        height: 64px;
+        padding-top: 20px;
+        background: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-left: 12px;
+        padding-right: 12px;
+        z-index: 100;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        box-sizing: border-box;
+
+        .nav-left {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .icon-back {
+                font-size: 20px;
+                color: #333;
+                font-weight: 400;
+            }
+        }
+
+        .nav-title {
+            font-size: 17px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .nav-right-placeholder {
+            width: 40px;
+        }
+    }
+
+    .content-scroll {
+        flex: 1;
+        overflow-y: auto;
+        padding: 12px;
+        -webkit-overflow-scrolling: touch;
+
+        .section-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+
+            .divider {
+                height: 1px;
+                background: #f5f5f5;
+                margin: 12px 0;
+            }
+
+            .row {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 8px;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+
+                .label {
+                    font-size: 14px;
+                    color: #666;
+                }
+
+                .value {
+                    flex: 1;
+                    text-align: right;
+                    font-size: 14px;
+                    color: #333;
+                    font-weight: 500;
+                    margin-left: 10px;
+
+                    &.blue {
+                        color: var(--primary-color);
+                    }
+                }
+
+                .val {
+                    font-size: 14px;
+                    color: #333;
+                    font-weight: 500;
+
+                    &.price {
+                        font-size: 18px;
+                        color: var(--danger-color);
+                        font-weight: bold;
+                    }
+
+                    .desc {
+                        font-size: 12px;
+                        color: var(--text-secondary);
+                        font-weight: normal;
+                    }
+                }
+
+                .icon-arrow {
+                    color: #ccc;
+                    margin-left: 6px;
+                    font-family: monospace;
+                }
+            }
+
+            .total-row {
+                @extend .row;
+                margin-top: 4px;
+
+                .label {
+                    font-weight: 600;
+                    color: #333;
+                }
+            }
+        }
+
+        // Product Card Specifics
+        .product-card {
+            display: flex;
+
+            .img {
+                width: 80px;
+                height: 80px;
+                border-radius: 8px;
+                background: #f5f5f5;
+                margin-right: 12px;
+            }
+
+            .info {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+
+                .name {
+                    font-size: 15px;
+                    font-weight: 500;
+                    color: #333;
+                }
+
+                .tags {
+                    font-size: 11px;
+                    color: #999;
+                }
+
+                .price-row {
+                    color: var(--danger-color);
+                    font-weight: bold;
+
+                    .symbol {
+                        font-size: 12px;
+                    }
+
+                    .amount {
+                        font-size: 18px;
+                    }
+
+                    .unit {
+                        font-size: 12px;
+                        color: #999;
+                        font-weight: normal;
+                        margin-left: 2px;
+                    }
+                }
+            }
+        }
+    }
+
+    .bottom-bar {
+        background: rgba(255, 255, 255, 0); // Transparent or match page bg?
+        // Usually bottom bar is specific block. The background in screenshot was white bar on grey bg.
+        // If moved up, it sits on grey bg.
+        // Let's make it have no background or transparent to look seamless?
+        // User said "remove whitespace".
+        // If I make it transparent, does it look better?
+        // "Real Pay $128 [Button]" floating.
+        // Let's try transparent to reduce the visual "Bar" weight.
+
+        padding: 12px 4px; // Adjust padding
+        padding-bottom: calc(constant(safe-area-inset-bottom) + 12px);
+        padding-bottom: calc(env(safe-area-inset-bottom) + 12px);
+
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        box-sizing: border-box;
+        gap: 12px;
+        box-shadow: none; // Remove shadow as it's not floating
+
+        .total {
+            font-size: 13px;
+            color: #333;
+            display: flex;
+            align-items: center;
+            // Removed margin-right: auto to pack elements to the right
+            white-space: nowrap;
+            flex-shrink: 0;
+
+            // Revert margin-right: auto if we want right aligned.
+            // But current request is not too much whitespace on sides.
+            // Let's stick to flex-end with margin-right effect but packed?
+            // User said: "把立即支付按钮宽度缩小，两边不需要有太多留白"
+            // "问题还是存在" implying content overflow mostly.
+            // Let's stick to flex-end with margin-right auto for total, pushing total to left?
+            // "两边不需要有太多留白" might mean don't push them to edges?
+            // If I remove margin-right: auto, they will pack to the right.
+            // Let's try packing them to the right with a spacer?
+            // Or Keep Space Between but reduced padding?
+            // Based on image, Total is far left, Button far right.
+            // Let's keep margin-right: auto for Total to keep it on left, but standard padding ensures safe margins.
+
+            span {
+                margin-right: 2px;
+            }
+
+            .amount {
+                font-size: 18px; // Slightly smaller to fit better
+                color: var(--danger-color);
+                font-weight: bold;
+                margin-left: 2px;
+            }
+        }
+
+        .btn-pay {
+            background: linear-gradient(90deg, var(--primary-color), #2B6DE5);
+            color: #fff;
+            border-radius: 18px;
+            padding: 0; // Reset padding
+            width: 100px; // Fixed narrow width
+            height: 34px;
+            line-height: 34px;
+            font-size: 13px;
+            font-weight: 500;
+            flex-shrink: 0;
+            box-shadow: 0 2px 6px rgba(11, 87, 208, 0.2);
+            margin: 0; // Reset margins
+        }
+    }
+}

@@ -1,0 +1,172 @@
+// Variables
+$primary-blue: #1A3678;
+$text-light: #FFFFFF;
+$text-dark: #333333;
+$text-gray: #999999;
+$bg-gray: #F5F7FA;
+$card-radius: 8px; // 10px -> 8px
+
+.page-user {
+    position: relative;
+    min-height: 100vh;
+    background-color: $bg-gray;
+    padding-bottom: 60px; // 40 -> 60 为TabBar(42px高+8px底部间距)留出空间,防止遮挡内容
+
+    // 1. Dark Blue Header Background - 继续压缩
+    .header-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 85px; // 100 -> 85 继续减少15px
+        background-color: $primary-blue;
+        z-index: 0;
+    }
+
+    // 2. Profile Section - 继续上移
+    .user-profile-section {
+        position: relative;
+        z-index: 10;
+        padding-top: 16px; // 24 -> 16 减少8px让内容上移
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 8px; // 10 -> 8 继续减少底部间距
+
+        .avatar-container {
+            margin-bottom: 3px; // 4 -> 3
+
+            .avatar {
+                width: 32px; // 36 -> 32 继续缩小头像
+                height: 32px;
+                border-radius: 50%;
+                border: 2px solid rgba(255, 255, 255, 0.3);
+                background-color: #eee;
+            }
+        }
+
+        .user-name-box {
+            text-align: center;
+            color: $text-light;
+
+            .nickname {
+                font-size: 11px; // 12 -> 11 继续压缩字体
+                font-weight: 500;
+                display: block;
+                margin-bottom: 1px; // 2 -> 1
+            }
+
+            .subtitle {
+                font-size: 8px; // 9 -> 8 继续压缩字体
+                opacity: 0.8;
+                font-weight: 300;
+                line-height: 1.2; // 添加行高控制
+            }
+        }
+    }
+
+    // 3. Floating Assets Card (White) - 继续优化
+    .assets-card {
+        position: relative;
+        z-index: 10;
+        margin: 0 10px;
+        background: #fff;
+        border-radius: $card-radius;
+        padding: 8px; // 10 -> 8 继续减少内边距
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        margin-bottom: 6px; // 8 -> 6 继续减少底部间距
+
+        .main-balance-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px; // 8 -> 6
+            padding-bottom: 5px; // 6 -> 5
+            border-bottom: 1px solid #f5f5f5;
+
+            .left {
+                display: flex;
+                align-items: center;
+
+                .icon-drop {
+                    font-size: 11px; // 12 -> 11
+                    margin-right: 3px;
+                }
+
+                .label {
+                    font-size: 10px; // 11 -> 10
+                    color: $primary-blue;
+                    font-weight: 500;
+                }
+            }
+
+            .amount-big {
+                font-size: 16px; // 17 -> 16
+                color: $primary-blue;
+                font-weight: bold;
+            }
+        }
+
+        .sub-stats-row {
+            display: flex;
+            justify-content: space-around;
+
+            .stat-item {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                .val {
+                    font-size: 11px; // 12 -> 11
+                    color: $text-dark;
+                    font-weight: 600;
+                    margin-bottom: 1px; // 2 -> 1
+                }
+
+                .label {
+                    font-size: 8px; // 9 -> 8
+                    color: $text-gray;
+                }
+            }
+        }
+    }
+
+    // 4. Menu List - 继续压缩
+    .menu-card {
+        margin: 0 10px;
+        background: #fff;
+        border-radius: $card-radius;
+        padding: 0 8px;
+        padding-bottom: 4px; // 6 -> 4
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            height: 28px; // 32 -> 28 进一步压缩菜单项高度
+            border-bottom: 1px solid #f9f9f9;
+
+            &:last-child {
+                border-bottom: none;
+            }
+
+            .icon-box {
+                width: 13px; // 14 -> 13
+                display: flex;
+                align-items: center;
+                margin-right: 5px;
+                // icon SVG handles size
+            }
+
+            .label {
+                flex: 1;
+                font-size: 11px; // 保持 11px 确保可读性
+                color: $text-dark;
+            }
+
+            .arrow {
+                color: #ccc;
+                font-size: 9px; // 保持 9px
+            }
+        }
+    }
+}

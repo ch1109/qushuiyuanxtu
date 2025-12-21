@@ -1,0 +1,103 @@
+/* Global Design Tokens */
+:root {
+  --primary-color: #0066FF;
+  --secondary-color: #00C2FF;
+  --accent-color: #FFB800;
+  --bg-color: #F5F7FA;
+  --text-primary: #1D2129;
+  --text-secondary: #86909C;
+  --success-color: #00B42A;
+  --danger-color: #F53F3F;
+  --warning-color: #FF7D00;
+
+  /* Glassmorphism */
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.8);
+  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #e0e4e8; // Outer desktop background
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica,
+    Segoe UI, Arial, Roboto, 'PingFang SC', 'miui', 'Hiragino Sans GB', 'Microsoft Yahei',
+    sans-serif;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+// Target the root container usually #app or similar in Taro H5
+// Target the root container usually #app or similar in Taro H5
+#app,
+.taro-app {
+  width: 100%;
+  max-width: 375px; // Force Mobile Width
+  // On desktop, enforce a 9:16 aspect ratio calculation relative to width, or simpler: let it be 100vh for scroll
+  // But to strictly follow "9:16 vertical screen content", we usually mean the viewport is mobile-like.
+  // We keep min-height 100vh to ensure it fills the vertical space of the "phone".
+  min-height: 100vh;
+
+  background-color: var(--bg-color); // Inner mobile background
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.1); // Shadow to separate from desktop bg
+  position: relative;
+  overflow-x: hidden;
+  margin: 0 auto; // Ensure centering if flex parent fails
+
+  // PC/Desktop specific tweak to visual
+  @media screen and (min-width: 500px) {
+    // Increase height to show more content (Modern ID ratio)
+    // Use vh to adapt to user's screen height, maxing out at reasonable mobile height
+    height: 85vh;
+    max-height: 896px; // approx iPhone 11 Pro Max height
+    min-height: 667px; // don't get too small
+
+    // Enable internal scrolling
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+    margin-top: 5vh; // vertical centering approximation
+    margin-bottom: 5vh;
+    border-radius: 20px; // Rounded corners for phone feel
+
+    // CRITICAL: Create a containing block for 'fixed' children (NavBar, TabBar)
+    // This ensures they stick to THIS container, not the browser window.
+    transform: translate3d(0, 0, 0);
+
+    // Hide scrollbar for clean "phone" look
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* Utility Classes */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: 12px;
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.safe-area-bottom {
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+}
