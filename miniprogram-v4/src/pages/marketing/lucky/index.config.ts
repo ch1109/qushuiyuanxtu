@@ -1,4 +1,5 @@
 export default definePageConfig({
-    navigationBarTitleText: '每日抽奖',
+    navigationBarTitleText: '',
+    navigationStyle: 'custom',
     backgroundColor: '#FF4D4F'
 })

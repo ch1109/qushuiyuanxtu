@@ -79,7 +79,7 @@ export default function DeviceList() {
 
     return (
         <View className='page-partner-device'>
-            <NavBar title='设备管理' color='#000' showBack />
+            <NavBar title='设备管理' showBack />
 
             <View className='stats-bar'>
                 <View className='stat-item'>

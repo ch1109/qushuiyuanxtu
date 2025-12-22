@@ -2,62 +2,38 @@
     min-height: 100vh;
     background: #F5F7FA;
 
-    .custom-header {
+    .tabs-bar {
         background: #fff;
         padding: 12px 20px;
         position: sticky;
-        top: 0;
+        top: calc(env(safe-area-inset-top) + 52px);
         z-index: 100;
+    }
 
-        .header-row {
-            display: flex;
-            align-items: center;
-            gap: 12px;
+    .tag-tabs {
+        display: flex;
+        gap: 10px;
+        overflow-x: auto;
+        white-space: nowrap;
 
-            .back-btn {
-                flex-shrink: 0;
-                width: 32px;
-                height: 32px;
-                background: rgba(24, 144, 255, 0.1);
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
+        &::-webkit-scrollbar {
+            display: none;
+        }
 
-                .icon-back {
-                    color: var(--primary-color);
-                    font-size: 16px;
-                    font-weight: bold;
-                }
-            }
+        .tag-item {
+            flex-shrink: 0;
+            padding: 6px 16px;
+            background: #F2F3F5;
+            color: #666;
+            border-radius: 18px;
+            font-size: 13px;
+            transition: all 0.3s;
+            white-space: nowrap;
 
-            .tag-tabs {
-                flex: 1;
-                display: flex;
-                gap: 10px;
-                overflow-x: auto;
-                white-space: nowrap;
-
-                &::-webkit-scrollbar {
-                    display: none;
-                }
-
-                .tag-item {
-                    flex-shrink: 0;
-                    padding: 6px 16px;
-                    background: #F2F3F5;
-                    color: #666;
-                    border-radius: 18px;
-                    font-size: 13px;
-                    transition: all 0.3s;
-                    white-space: nowrap;
-
-                    &.active {
-                        background: var(--primary-color);
-                        color: #fff;
-                        font-weight: 500;
-                    }
-                }
+            &.active {
+                background: var(--primary-color);
+                color: #fff;
+                font-weight: 500;
             }
         }
     }

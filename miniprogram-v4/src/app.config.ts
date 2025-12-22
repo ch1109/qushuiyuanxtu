@@ -11,6 +11,8 @@ export default defineAppConfig({
     'pages/partner/group/index',
     'pages/partner/device/index',
     'pages/partner/device/detail',
+    'pages/partner/approval/index',
+    'pages/partner/rental/index',
     'pages/mall/index',
     'pages/mall/checkout',
     'pages/marketing/poster',

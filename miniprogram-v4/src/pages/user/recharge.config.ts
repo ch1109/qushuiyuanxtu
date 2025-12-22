@@ -1,5 +1,7 @@
 export default definePageConfig({
-    navigationBarTitleText: '充值中心',
-    navigationStyle: 'default',
-    backgroundColor: '#F5F7FA'
+    navigationBarTitleText: '',
+    navigationStyle: 'custom',
+    navigationBarBackgroundColor: '#F3F6FF',
+    navigationBarTextStyle: 'white',
+    backgroundColor: '#F3F6FF'
 })

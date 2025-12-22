@@ -47,10 +47,19 @@ export default function PartnerDashboard() {
     return (
         <View className='page-partner-dashboard'>
             {/* Standard White Header with Back Button */}
-            <NavBar title='合伙人工作台' color='#000' showBack />
+            <NavBar title='合伙人工作台' showBack />
 
             {/* Header Stats - Removed glass-card since we are on white background now mostly, keep simple or check SCSS later */}
             <View className='stats-header glass-card'>
+                {stats?.partnerTags?.length ? (
+                    <View className='partner-tags'>
+                        {stats.partnerTags.map((tag) => (
+                            <Text key={tag} className='tag'>
+                                {tag}
+                            </Text>
+                        ))}
+                    </View>
+                ) : null}
                 <View className='total-section'>
                     <Text className='label'>本月预估收益(元)</Text>
                     <Text className='value'>{stats?.month.toFixed(2) || '0.00'}</Text>
@@ -61,11 +70,11 @@ export default function PartnerDashboard() {
                         <Text className='val'>{stats?.yesterday.toFixed(2)}</Text>
                     </View>
                     <View className='item'>
-                        <Text className='label'>累计售水</Text>
+                        <Text className='label'>可提现金额</Text>
                         <Text className='val'>{stats?.totalRefill.toFixed(2)}</Text>
                     </View>
                     <View className='item'>
-                        <Text className='label'>累计商城</Text>
+                        <Text className='label'>商品推广佣金</Text>
                         <Text className='val'>{stats?.totalMall.toFixed(2)}</Text>
                     </View>
                 </View>

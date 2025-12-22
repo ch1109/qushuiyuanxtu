@@ -25,6 +25,8 @@ export interface Device {
     lng: number;
     distance: number; // km
   };
+  province?: string;
+  city?: string;
   address?: string;
   hours?: string;
   tags?: string[];
@@ -45,6 +47,14 @@ export interface Device {
   chargingConfig?: {
     rentalPrice: number; // yearly rental price
   };
+  installDate?: string;
+  installLocation?: string;
+  contractStartDate?: string;
+  contractEndDate?: string;
+  contactName?: string;
+  contactPhone?: string;
+  contractPrice?: number;
+  profitRate?: number;
 }
 
 export interface Order {
@@ -63,4 +73,5 @@ export interface PartnerStats {
   month: number;
   teamSize: number;
   deviceCount: number;
+  partnerTags?: string[];
 }

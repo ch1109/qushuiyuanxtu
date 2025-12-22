@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { View, Text, Image, Button } from '@tarojs/components'
 import Taro from '@tarojs/taro'
+import NavBar from '../../components/common/NavBar'
 import './index.scss'
 
 export default function Mall() {
@@ -34,26 +35,19 @@ export default function Mall() {
 
     return (
         <View className='page-mall'>
-            {/* Custom Header & Nav */}
-            <View className='custom-header safe-area-top'>
-                <View className='header-row'>
-                    {/* Left: Back Button */}
-                    <View className='back-btn' onClick={() => Taro.switchTab({ url: '/pages/index/index' })}>
-                        <Text className='icon-back'>←</Text>
-                    </View>
+            <NavBar title='精选商城' showBack />
 
-                    {/* Right: Tag Tabs */}
-                    <View className='tag-tabs'>
-                        {['设备租赁', '安装服务', '好物甄选'].map((title, idx) => (
-                            <View
-                                key={idx}
-                                className={`tag-item ${activeTab === idx ? 'active' : ''}`}
-                                onClick={() => setActiveTab(idx)}
-                            >
-                                {title}
-                            </View>
-                        ))}
-                    </View>
+            <View className='tabs-bar'>
+                <View className='tag-tabs'>
+                    {['设备租赁', '安装服务', '好物甄选'].map((title, idx) => (
+                        <View
+                            key={idx}
+                            className={`tag-item ${activeTab === idx ? 'active' : ''}`}
+                            onClick={() => setActiveTab(idx)}
+                        >
+                            {title}
+                        </View>
+                    ))}
                 </View>
             </View>
 

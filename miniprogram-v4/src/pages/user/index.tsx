@@ -28,7 +28,7 @@ export default function UserCenter() {
             {/* Dark Blue Header Background */}
             <View className='header-bg' />
 
-            <NavBar title='个人中心' transparent color='#fff' />
+            <NavBar title='个人中心' transparent color='#fff' size='compact' showCapsule={false} />
 
             {/* Profile Section (Centered) */}
             <View className='user-profile-section'>
@@ -109,6 +109,21 @@ export default function UserCenter() {
                 <View className='menu-item' onClick={() => handleNav('/pages/partner/dashboard')}>
                     <View className='icon-box'><People size={20} color='#333' /></View>
                     <Text className='label'>合伙人</Text>
+                    <Text className='arrow'>{'>'}</Text>
+                </View>
+                <View className='menu-item' onClick={() => handleNav('/pages/partner/device/index')}>
+                    <View className='icon-box'><Order size={20} color='#333' /></View>
+                    <Text className='label'>业务管理</Text>
+                    <Text className='arrow'>{'>'}</Text>
+                </View>
+                <View className='menu-item' onClick={() => handleNav('/pages/partner/approval/index')}>
+                    <View className='icon-box'><Star size={20} color='#333' /></View>
+                    <Text className='label'>审批管理</Text>
+                    <Text className='arrow'>{'>'}</Text>
+                </View>
+                <View className='menu-item' onClick={() => handleNav('/pages/partner/rental/index')}>
+                    <View className='icon-box'><Cart size={20} color='#333' /></View>
+                    <Text className='label'>租赁管理</Text>
                     <Text className='arrow'>{'>'}</Text>
                 </View>
                 <View className='menu-item' open-type="contact">

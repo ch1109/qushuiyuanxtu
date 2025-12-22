@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { View, Text, Image, Swiper, SwiperItem, Button } from '@tarojs/components'
+import { View, Text, Image, Button } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import CustomTabBar from '../../components/common/CustomTabBar'
 import Loading from '../../components/common/Loading'
@@ -8,6 +8,7 @@ import AuthModal from '../../components/common/AuthModal'
 import { useAuthStore } from '../../store/auth'
 import { Device } from '../../types'
 import { Scan, Share, Location, People } from '@nutui/icons-react-taro' // Hypothetical icons, will adjust if needed
+import bannerImage from '../../assets/images/banner.png'
 import './index.scss'
 
 export default function Index() {
@@ -26,22 +27,15 @@ export default function Index() {
     avatar: realUser?.avatar || 'https://img12.360buyimg.com/imagetools/jfs/t1/143702/31/16654/116794/5fc6f541Edebf8a57/4138097748889987.png'
   }
 
-  // Banner Data Mock with Video Support
-  const banners = [
-    { type: 'image', url: 'https://img12.360buyimg.com/imagetools/jfs/t1/196130/38/8105/14329/60c806a4Ed506298a/e6de9fb7b8490f38.png' },
-    { type: 'video', url: 'https://storage.jd.com/about/big-final.mp4?Expires=3730193075&AccessKey=3LoYX1dQWa6ZXzZP&Signature=ViGT7VLtJd2E2x%2F%2F3n%2F%2F3n%2F' } // Mock video
-  ]
-
   // KingKong Grid Menu Items
   // Icons are mapped from NutUI or just using placeholders/images if specific icons missing
   // Using NutUI icons: People, Share, Cart, Shop, Star, etc.
   // Since we don't have all icons imported, we will use a helper to render generic icons or images
   const gridItems = [
     { id: 'service', label: '专享服务', sub: '精选好物', icon: 'Shop', path: '/pages/mall/index', color: '#FFB800' }, // Service Store
-    { id: 'group', label: '拼团活动', sub: '合伙人专享', icon: 'People', path: '/pages/partner/group/index', color: '#FF4D4F', role: 'PARTNER' }, // Group Buy
     { id: 'lucky', label: '每日抽奖', sub: '赢水币', icon: 'Star', path: '/pages/marketing/lucky/index', color: '#722ED1' }, // Lucky Draw
     { id: 'recharge', label: '购买水币', sub: '多买多送', icon: 'Cart', path: '/pages/user/recharge', color: '#1890FF' }, // Recharge
-    { id: 'share', label: '邀请赚钱', sub: '裂变分润', icon: 'Share', path: '', openType: 'share', color: '#52C41A' }, // Share
+    { id: 'share', label: '分享得水币', sub: '裂变分润', icon: 'Share', path: '', openType: 'share', color: '#52C41A' }, // Share
   ]
 
   useEffect(() => {
@@ -98,29 +92,7 @@ export default function Index() {
         <View className='nav-bar-slot' />
 
         <View className='banner-container'>
-          <Swiper
-            className='banner-swiper'
-            circular
-            autoplay
-            interval={5000}
-            indicatorDots
-            indicatorColor='rgba(255,255,255,0.4)'
-            indicatorActiveColor='#fff'
-          >
-            {banners.map((item, idx) => (
-              <SwiperItem key={idx}>
-                {item.type === 'video' ? (
-                  <View className='video-placeholder'>
-                    {/* Simulating Video Player */}
-                    <Text className='video-tag'>▶ 品牌宣传片</Text>
-                    <Image className='banner-img' src={banners[0].url} mode='aspectFill' />
-                  </View>
-                ) : (
-                  <Image className='banner-img' src={item.url} mode='aspectFill' />
-                )}
-              </SwiperItem>
-            ))}
-          </Swiper>
+          <Image className='banner-img' src={bannerImage} mode='aspectFill' />
         </View>
       </View>
 
@@ -198,7 +170,7 @@ export default function Index() {
           </Button>
 
           <Button className='main-btn manual-btn' onClick={() => handleNav('/pages/device/input')}>
-            <Text>输入编码</Text>
+            <Text>设备号取水</Text>
           </Button>
         </View>
       </View>

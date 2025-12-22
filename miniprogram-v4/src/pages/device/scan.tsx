@@ -64,7 +64,7 @@ export default function Scan() {
 
     return (
         <View className='page-scan'>
-            <NavBar title='智能取水' transparent color='#fff' showBack />
+            <NavBar title='智能取水' showBack />
 
             {/* Dynamic Wave Background */}
             <View className={`wave-bg ${status === 'POURING' ? 'active' : ''}`}>

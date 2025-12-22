@@ -24,9 +24,9 @@ const CustomTabBar: React.FC<Props> = ({ current, role, onChange }) => {
     ]
 
     const partnerTabs: TabItem[] = [
-        { title: '工作台', icon: 'dashboard' },
-        { title: '工具', icon: 'apps' },
-        { title: '收益', icon: 'money' }
+        { title: '首页', icon: 'dashboard' },
+        { title: '附近水站', icon: 'apps' },
+        { title: '我的', icon: 'money' }
     ]
 
     const tabs = role === 'USER' ? userTabs : partnerTabs

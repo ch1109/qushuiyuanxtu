@@ -77,7 +77,7 @@ export default function LuckyDraw() {
 
     return (
         <View className='page-lucky'>
-            <NavBar title='每日幸运抽奖' color='#fff' transparent showBack />
+            <NavBar title='每日幸运抽奖' showBack />
 
             <View className='title-img'>幸运大转盘</View>
 

@@ -10,7 +10,7 @@ export default function Poster() {
 
     return (
         <View className='page-poster'>
-            <NavBar title='邀请好友' transparent color='#fff' showBack />
+            <NavBar title='邀请好友' showBack />
 
             {/* Poster Preview */}
             <View className='poster-preview'>

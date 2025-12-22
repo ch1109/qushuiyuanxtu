@@ -28,6 +28,16 @@ export const MOCK_DEVICES: Device[] = [
             lng: 113.32446,
             distance: 0.8
         },
+        province: '广东省',
+        city: '广州市',
+        installDate: '2024-09-12',
+        installLocation: '广州塔西门岗亭内侧',
+        contractStartDate: '2024-10-01',
+        contractEndDate: '2027-09-30',
+        contactName: '张经理',
+        contactPhone: '13800001111',
+        contractPrice: 98000,
+        profitRate: 0.12,
         waterQuality: { tds: 12, temp: 25.5, status: 'EXCELLENT' },
         promotion: { isActive: true, sponsorName: '腾讯公益' }
     },
@@ -42,6 +52,16 @@ export const MOCK_DEVICES: Device[] = [
             lng: 113.32623,
             distance: 2.5
         },
+        province: '广东省',
+        city: '广州市',
+        installDate: '2023-06-18',
+        installLocation: '花城广场北侧入口',
+        contractStartDate: '2023-07-01',
+        contractEndDate: '2026-06-30',
+        contactName: '刘老师',
+        contactPhone: '13600002222',
+        contractPrice: 88000,
+        profitRate: 0.1,
         waterQuality: { tds: 45, temp: 26.0, status: 'GOOD' }
     },
     {
@@ -55,6 +75,16 @@ export const MOCK_DEVICES: Device[] = [
             lng: 113.3205,
             distance: 1.2
         },
+        province: '广东省',
+        city: '广州市',
+        installDate: '2025-01-05',
+        installLocation: '地铁B口外侧',
+        contractStartDate: '2025-02-01',
+        contractEndDate: '2028-01-31',
+        contactName: '王主管',
+        contactPhone: '13500003333',
+        contractPrice: 92000,
+        profitRate: 0.15,
         waterQuality: { tds: 0, temp: 0, status: 'NORMAL' },
         todayEarnings: 0.00,
         chargingConfig: { rentalPrice: 1299 }
@@ -79,7 +109,8 @@ export const MOCK_PARTNER_STATS: PartnerStats = {
     yesterday: 850.50,
     month: 25800.00,
     teamSize: 128,
-    deviceCount: 15
+    deviceCount: 15,
+    partnerTags: ['营销合伙人', '投资合伙人']
 };
 
 // Simulation delay helper

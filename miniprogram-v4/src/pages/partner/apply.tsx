@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { View, Text, Input, Button, Image } from '@tarojs/components'
 import Taro from '@tarojs/taro'
+import NavBar from '../../components/common/NavBar'
 import { PartnerService } from '../../services/partner'
 import './apply.scss'
 
@@ -31,6 +32,7 @@ export default function PartnerApply() {
 
     return (
         <View className='page-apply'>
+            <NavBar title='申请成为合伙人' showBack />
             {/* Step Indicator */}
             <View className='steps'>
                 <View className={`step-item ${step >= 1 ? 'active' : ''}`}>

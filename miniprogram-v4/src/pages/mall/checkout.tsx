@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { View, Text, Button, Image } from '@tarojs/components'
 import Taro, { useRouter } from '@tarojs/taro'
+import NavBar from '../../components/common/NavBar'
 import './checkout.scss'
 
 export default function Checkout() {
@@ -39,14 +40,7 @@ export default function Checkout() {
 
     return (
         <View className='page-checkout'>
-            {/* Custom Header - Fixed at top via Flex */}
-            <View className='custom-header status-bar-padding'>
-                <View className='nav-left' onClick={() => Taro.navigateBack()}>
-                    <Text className='icon-back'>{'<'}</Text>
-                </View>
-                <Text className='nav-title'>确认订单</Text>
-                <View className='nav-right-placeholder' />
-            </View>
+            <NavBar title='确认订单' showBack />
 
             {/* Scrollable Content */}
             <View className='content-scroll'>

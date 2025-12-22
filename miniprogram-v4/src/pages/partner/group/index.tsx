@@ -35,7 +35,7 @@ export default function PartnerGroup() {
 
     return (
         <View className='page-partner-group'>
-            <NavBar title='社区拼团' color='#000' showBack />
+            <NavBar title='社区拼团' showBack />
 
             <View className='form-card'>
                 <View className='form-item'>
