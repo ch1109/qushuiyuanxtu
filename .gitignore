@@ -22,3 +22,6 @@ node_modules/
 # Local backups
 .git_backup
 **/.git_backup
+
+# Local dev logs
+miniprogram-v4/.dev-h5.log
