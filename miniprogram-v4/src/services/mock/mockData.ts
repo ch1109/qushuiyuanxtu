@@ -1,4 +1,4 @@
-import { User, Device, Order, PartnerStats } from '../../types';
+import { User, Device, Order, PartnerStats, PromoUser, RedPacket } from '../../types';
 
 export const MOCK_USER: User = {
     uid: 'GD888888',
@@ -103,6 +103,43 @@ export const MOCK_ORDERS: Order[] = [
     { id: 'O1003', type: 'MALL', status: 'PENDING', amount: 299, time: '2025-12-15 09:00', detail: 'TDS检测笔 x1' }
 ];
 
+export const MOCK_PROMO_USERS: PromoUser[] = [
+    {
+        id: 'PU-001',
+        nickname: '王小敏',
+        avatar: 'https://img12.360buyimg.com/imagetools/jfs/t1/196130/38/8105/14329/60c806a4Ed506298a/e6de9fb7b8490f38.png',
+        source: 'SHARE_CODE',
+        registeredAt: '2025-12-10 09:12',
+        lastWater: { time: '2025-12-18 09:20', detail: '饮用水 5L · 设备 广州塔西门岗亭站' },
+        lastHelpSell: { time: '2025-12-14 11:06', detail: '净水壶滤芯 x1' }
+    },
+    {
+        id: 'PU-002',
+        nickname: '李晓晨',
+        avatar: 'https://img14.360buyimg.com/imagetools/jfs/t1/165930/17/16781/15720/60c806a4E52156827/e6de9fb7b8490f38.png',
+        source: 'RED_PACKET',
+        registeredAt: '2025-12-11 18:40',
+        lastWater: { time: '2025-12-19 08:05', detail: '饮用水 10L · 设备 珠江新城花城广场站' },
+        lastHelpSell: { time: '2025-12-12 20:18', detail: 'TDS检测笔 x1' }
+    },
+    {
+        id: 'PU-003',
+        nickname: '赵珂',
+        avatar: 'https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0',
+        source: 'SHARE_CODE',
+        registeredAt: '2025-12-12 12:10',
+        lastWater: { time: '2025-12-16 15:22', detail: '饮用水 5L · 设备 客村地铁站B口站' }
+    },
+    {
+        id: 'PU-004',
+        nickname: '陈雨欣',
+        avatar: 'https://img12.360buyimg.com/imagetools/jfs/t1/196130/38/8105/14329/60c806a4Ed506298a/e6de9fb7b8490f38.png',
+        source: 'OTHER',
+        registeredAt: '2025-12-15 21:35',
+        lastHelpSell: { time: '2025-12-19 09:45', detail: '便携水杯 x1' }
+    }
+];
+
 export const MOCK_PARTNER_STATS: PartnerStats = {
     totalRefill: 12580.00,
     totalMall: 3200.00,
@@ -112,6 +149,36 @@ export const MOCK_PARTNER_STATS: PartnerStats = {
     deviceCount: 15,
     partnerTags: ['营销合伙人', '投资合伙人']
 };
+
+export const MOCK_RED_PACKETS: RedPacket[] = [
+    {
+        id: 'RP-001',
+        title: '新用户取水红包',
+        amount: 500,
+        totalCount: 100,
+        sentCount: 72,
+        expireAt: '2025-12-31 23:59',
+        status: 'AVAILABLE'
+    },
+    {
+        id: 'RP-002',
+        title: '门店开业助力红包',
+        amount: 8,
+        totalCount: 150,
+        sentCount: 150,
+        expireAt: '2025-12-20 23:59',
+        status: 'SENT'
+    },
+    {
+        id: 'RP-003',
+        title: '节日拉新红包',
+        amount: 10,
+        totalCount: 80,
+        sentCount: 80,
+        expireAt: '2025-12-01 23:59',
+        status: 'EXPIRED'
+    }
+];
 
 // Simulation delay helper
 export const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));

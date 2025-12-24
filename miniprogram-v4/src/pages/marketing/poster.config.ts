@@ -1,5 +1,5 @@
 export default definePageConfig({
-    navigationBarTitleText: '分享海报',
+    navigationBarTitleText: '邀请好友',
     navigationStyle: 'custom',
-    backgroundColor: '#333'
+    backgroundColor: '#F3F5F9'
 })

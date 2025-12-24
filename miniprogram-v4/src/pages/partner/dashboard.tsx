@@ -30,6 +30,9 @@ export default function PartnerDashboard() {
             case 'device':
                 Taro.navigateTo({ url: '/pages/partner/device/index' })
                 break
+            case 'team':
+                Taro.navigateTo({ url: '/pages/partner/promo-users/index' })
+                break
             case 'group':
                 Taro.navigateTo({ url: '/pages/partner/group/index' })
                 break
@@ -38,6 +41,15 @@ export default function PartnerDashboard() {
                 break
             case 'poster':
                 Taro.navigateTo({ url: '/pages/marketing/poster' })
+                break
+            case 'lucky':
+                Taro.navigateTo({ url: '/pages/marketing/lucky/index' })
+                break
+            case 'redPacket':
+                Taro.navigateTo({ url: '/pages/partner/red-packet/index' })
+                break
+            case 'helpSell':
+                Taro.navigateTo({ url: '/pages/mall/index' })
                 break
             default:
                 Taro.showToast({ title: '功能开发中...', icon: 'none' })
@@ -90,23 +102,27 @@ export default function PartnerDashboard() {
                     </View>
                     <View className='grid-item' onClick={() => handleNav('team')}>
                         <View className='icon-box team'><View className='icon' /></View>
-                        <Text>团队管理 {stats?.teamSize}</Text>
+                        <Text>我的推广用户 {stats?.teamSize}</Text>
                     </View>
                     <View className='grid-item' onClick={() => handleNav('withdraw')}>
                         <View className='icon-box money'><View className='icon' /></View>
                         <Text>提现中心</Text>
                     </View>
-                    <View className='grid-item' onClick={() => handleNav('qrcode')}>
-                        <View className='icon-box code'><View className='icon' /></View>
-                        <Text>推广码</Text>
+                    <View className='grid-item' onClick={() => handleNav('lucky')}>
+                        <View className='icon-box lucky'><View className='icon' /></View>
+                        <Text>每日抽奖</Text>
                     </View>
                 </View>
             </View>
 
             {/* Marketing Tools */}
             <View className='tools-section'>
-                <Text className='section-title'>营销增长</Text>
+                <Text className='section-title'>合伙人营销工具</Text>
                 <View className='grid'>
+                    <View className='grid-item' onClick={() => handleNav('helpSell')}>
+                        <View className='icon-box sell'><View className='icon' /></View>
+                        <Text>帮卖商品</Text>
+                    </View>
                     <View className='grid-item' onClick={() => handleNav('ai')}>
                         <View className='icon-box ai'><View className='icon' /></View>
                         <Text>数字员工</Text>
@@ -115,9 +131,13 @@ export default function PartnerDashboard() {
                         <View className='icon-box group'><View className='icon' /></View>
                         <Text>社区拼团</Text>
                     </View>
+                    <View className='grid-item' onClick={() => handleNav('redPacket')}>
+                        <View className='icon-box packet'><View className='icon' /></View>
+                        <Text>红包分享</Text>
+                    </View>
                     <View className='grid-item' onClick={() => handleNav('poster')}>
                         <View className='icon-box img'><View className='icon' /></View>
-                        <Text>海报生成</Text>
+                        <Text>推广海报</Text>
                     </View>
                 </View>
             </View>

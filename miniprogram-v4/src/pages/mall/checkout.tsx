@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { View, Text, Button, Image } from '@tarojs/components'
 import Taro, { useRouter } from '@tarojs/taro'
 import NavBar from '../../components/common/NavBar'
@@ -6,8 +6,24 @@ import './checkout.scss'
 
 export default function Checkout() {
     const router = useRouter()
-    // type: 'RENTAL' | 'SERVICE' | 'SALE'
-    const { type = 'SALE', name, price, img } = router.params
+    // type: 'INSTALL' | 'RENTAL' | 'SERVICE' | 'SALE'
+    const { type = 'SALE', name, price, img, duration, startDate } = router.params
+    const isInstall = type === 'INSTALL'
+    const isRental = type === 'RENTAL'
+    const isService = type === 'SERVICE'
+    const isSale = type === 'SALE'
+
+    const formatDate = (dateValue: Date) => {
+        const year = dateValue.getFullYear()
+        const month = `${dateValue.getMonth() + 1}`.padStart(2, '0')
+        const day = `${dateValue.getDate()}`.padStart(2, '0')
+        return `${year}-${month}-${day}`
+    }
+
+    const rentalDuration = duration ? decodeURIComponent(duration) : '1年'
+    const rentalStartDate = startDate ? decodeURIComponent(startDate) : formatDate(new Date())
+    const decodedName = decodeURIComponent(name || '商品名称')
+    const decodedImg = decodeURIComponent(img || '')
 
     const [loading, setLoading] = useState(false)
 
@@ -46,7 +62,7 @@ export default function Checkout() {
             <View className='content-scroll'>
                 {/* 1. Address / Contact Section */}
                 <View className='section-card address-card'>
-                    {(type === 'SALE' || type === 'RENTAL') && (
+                    {(isSale || isRental) && (
                         <View className='row'>
                             <Text className='label'>收货地址</Text>
                             <Text className='value'>{address}</Text>
@@ -54,7 +70,7 @@ export default function Checkout() {
                         </View>
                     )}
 
-                    {type === 'SERVICE' && (
+                    {(isService || isInstall) && (
                         <>
                             <View className='row'>
                                 <Text className='label'>服务地址</Text>
@@ -78,20 +94,34 @@ export default function Checkout() {
 
                 {/* 2. Product Info */}
                 <View className='section-card product-card'>
-                    <Image className='img' src={decodeURIComponent(img || '')} mode='aspectFill' />
+                    <Image className='img' src={decodedImg} mode='aspectFill' />
                     <View className='info'>
-                        <Text className='name'>{decodeURIComponent(name || '商品名称')}</Text>
+                        <Text className='name'>{decodedName}</Text>
                         <Text className='tags'>
-                            {type === 'RENTAL' ? '免押金 | 免费上门安装' :
-                                type === 'SERVICE' ? '官方服务 | 售后无忧' : '极速发货 | 七天无理由'}
+                            {isInstall ? '安装到家 | 上门安装' :
+                                isRental ? '免押金 | 免费上门安装' :
+                                    isService ? '官方服务 | 售后无忧' : '极速发货 | 七天无理由'}
                         </Text>
                         <Text className='price-row'>
                             <Text className='symbol'>¥</Text>
                             <Text className='amount'>{price}</Text>
-                            {type === 'RENTAL' && <Text className='unit'>/年</Text>}
+                            {(isRental || isInstall) && <Text className='unit'>/年</Text>}
                         </Text>
                     </View>
                 </View>
+
+                {isInstall && (
+                    <View className='section-card rental-card'>
+                        <View className='row'>
+                            <Text className='label'>租赁时长</Text>
+                            <Text className='val'>{rentalDuration}</Text>
+                        </View>
+                        <View className='row'>
+                            <Text className='label'>起始日期</Text>
+                            <Text className='val'>{rentalStartDate}</Text>
+                        </View>
+                    </View>
+                )}
 
                 {/* 3. Cost Breakdown */}
                 <View className='section-card cost-card'>
@@ -103,7 +133,7 @@ export default function Checkout() {
                         <Text className='label'>运费/上门费</Text>
                         <Text className='val'>¥0.00</Text>
                     </View>
-                    {type === 'RENTAL' && (
+                    {(isRental || isInstall) && (
                         <View className='row'>
                             <Text className='label'>设备押金</Text>
                             <Text className='val'>¥0.00 <Text className='desc'>(信用免押)</Text></Text>

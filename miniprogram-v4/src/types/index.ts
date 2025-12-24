@@ -9,7 +9,7 @@ export interface User {
     reward: number;
     money: number; // 现金余额
   };
-  roleTags: ('USER' | 'PARTNER_CITY' | 'PARTNER_DISTRICT' | 'PARTNER_DEVICE' | 'PARTNER_MAINTAIN')[];
+  roleTags: ('USER' | 'PARTNER_CITY' | 'PARTNER_DISTRICT' | 'PARTNER_DEVICE' | 'PARTNER_MAINTAIN' | 'DEBUGGER')[];
   vipStatus: boolean;
   vipEndDate?: string;
 }
@@ -64,6 +64,31 @@ export interface Order {
   amount: number;
   time: string;
   detail: string;
+}
+
+export interface PromoUserRecord {
+  time: string;
+  detail: string;
+}
+
+export interface PromoUser {
+  id: string;
+  nickname: string;
+  avatar: string;
+  source: 'SHARE_CODE' | 'RED_PACKET' | 'OTHER';
+  registeredAt: string;
+  lastWater?: PromoUserRecord;
+  lastHelpSell?: PromoUserRecord;
+}
+
+export interface RedPacket {
+  id: string;
+  title: string;
+  amount: number;
+  totalCount: number;
+  sentCount: number;
+  expireAt: string;
+  status: 'AVAILABLE' | 'SENT' | 'EXPIRED';
 }
 
 export interface PartnerStats {

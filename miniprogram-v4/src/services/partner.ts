@@ -1,5 +1,5 @@
-import { PartnerStats, Device } from '../types'
-import { MOCK_PARTNER_STATS, MOCK_DEVICES, MOCK_AI_POSTER_URL, sleep } from './mock/mockData'
+import { PartnerStats, Device, PromoUser, RedPacket } from '../types'
+import { MOCK_PARTNER_STATS, MOCK_DEVICES, MOCK_AI_POSTER_URL, MOCK_PROMO_USERS, MOCK_RED_PACKETS, sleep } from './mock/mockData'
 
 export const PartnerService = {
     // Get partner dashboard stats
@@ -42,5 +42,17 @@ export const PartnerService = {
     getDeviceDetail: async (id: string): Promise<Device | undefined> => {
         await sleep(500)
         return MOCK_DEVICES.find(d => d.id === id)
+    },
+
+    // Get Promo Users
+    getPromoUsers: async (): Promise<PromoUser[]> => {
+        await sleep(600)
+        return MOCK_PROMO_USERS
+    },
+
+    // Get Red Packets
+    getRedPackets: async (): Promise<RedPacket[]> => {
+        await sleep(600)
+        return MOCK_RED_PACKETS
     }
 }

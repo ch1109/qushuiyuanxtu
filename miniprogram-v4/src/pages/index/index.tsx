@@ -7,7 +7,7 @@ import AuthModal from '../../components/common/AuthModal'
 // import { DeviceService } from '../../services/device'
 import { useAuthStore } from '../../store/auth'
 import { Device } from '../../types'
-import { Scan, Share, Location, People } from '@nutui/icons-react-taro' // Hypothetical icons, will adjust if needed
+import { Scan } from '@nutui/icons-react-taro'
 import bannerImage from '../../assets/images/banner.png'
 import './index.scss'
 
@@ -27,17 +27,6 @@ export default function Index() {
     avatar: realUser?.avatar || 'https://img12.360buyimg.com/imagetools/jfs/t1/143702/31/16654/116794/5fc6f541Edebf8a57/4138097748889987.png'
   }
 
-  // KingKong Grid Menu Items
-  // Icons are mapped from NutUI or just using placeholders/images if specific icons missing
-  // Using NutUI icons: People, Share, Cart, Shop, Star, etc.
-  // Since we don't have all icons imported, we will use a helper to render generic icons or images
-  const gridItems = [
-    { id: 'service', label: '专享服务', sub: '精选好物', icon: 'Shop', path: '/pages/mall/index', color: '#FFB800' }, // Service Store
-    { id: 'lucky', label: '每日抽奖', sub: '赢水币', icon: 'Star', path: '/pages/marketing/lucky/index', color: '#722ED1' }, // Lucky Draw
-    { id: 'recharge', label: '购买水币', sub: '多买多送', icon: 'Cart', path: '/pages/user/recharge', color: '#1890FF' }, // Recharge
-    { id: 'share', label: '分享得水币', sub: '裂变分润', icon: 'Share', path: '', openType: 'share', color: '#52C41A' }, // Share
-  ]
-
   useEffect(() => {
     loadData()
   }, [])
@@ -45,25 +34,28 @@ export default function Index() {
   const loadData = async () => {
     setLoading(true)
     try {
-      // Mocking 1 recommended device with Water Quality Data
-      const mockDevice = {
-        id: '1001',
-        name: '广东省东莞市大朗镇新世纪明上居',
-        location: { distance: 0.8 },
-        status: 'ONLINE',
-        // New: Water Quality Mock
-        waterQuality: {
-          tds: 18,
-          temp: 26,
-          turbidity: 0.1,
-          eval: '优',
-          status: 'EXCELLENT',
-          updateTime: '10:42:00'
+      const mockDevices = [
+        {
+          id: '1001',
+          name: '广东省东莞市大朗镇新世纪明上居',
+          location: { distance: 0.8 },
+          status: 'NORMAL'
+        },
+        {
+          id: '1002',
+          name: '广东省东莞市大朗镇富华楼',
+          location: { distance: 1.6 },
+          status: 'MAINTENANCE'
+        },
+        {
+          id: '1003',
+          name: '广东省东莞市大朗镇松朗广场',
+          location: { distance: 2.4 },
+          status: 'FAULT'
         }
-      }
-      // Simulate API delay
+      ]
       setTimeout(() => {
-        setDevices([mockDevice as any])
+        setDevices(mockDevices as any)
       }, 500)
     } finally {
       setLoading(false)
@@ -83,96 +75,85 @@ export default function Index() {
     Taro.navigateTo({ url: path })
   }
 
-  const recommendedDevice = devices[0]
+  const getStatusInfo = (status?: string) => {
+    switch (status) {
+      case 'MAINTENANCE':
+        return { label: '维护', className: 'maintenance' }
+      case 'FAULT':
+        return { label: '故障', className: 'fault' }
+      default:
+        return { label: '正常', className: 'normal' }
+    }
+  }
 
   return (
     <View className='page-index'>
-      {/* 1. Header Section with Banner */}
-      <View className='header-section'>
+      {/* Hero Banner */}
+      <View className='hero-section'>
         <View className='nav-bar-slot' />
-
-        <View className='banner-container'>
-          <Image className='banner-img' src={bannerImage} mode='aspectFill' />
+        <Image className='hero-img' src={bannerImage} mode='aspectFill' />
+        <View className='hero-overlay'>
+          <View className='hero-actions'>
+            <View className='hero-action'>
+              <Text className='dots'>...</Text>
+            </View>
+            <View className='hero-action'>
+              <Text className='minus'>-</Text>
+            </View>
+            <View className='hero-action'>
+              <View className='circle' />
+            </View>
+          </View>
         </View>
       </View>
 
-      <View className='main-content'>
-
-        {/* 2. KingKong Grid Area (New!) */}
-        <View className='king-kong-card'>
-          {gridItems.map((item) => {
-            // Permission Check
-            if (item.role === 'PARTNER' && !user.roleTags.some(t => t.startsWith('PARTNER'))) return null
-
-            return (
-              <View
-                key={item.id}
-                className='grid-item'
-                onClick={() => item.path ? handleNav(item.path) : null}
-                // @ts-ignore
-                open-type={item.openType}
-              >
-                <View className='icon-box' style={{ backgroundColor: `${item.color}15` }}>
-                  {/* Dynamic Icon Rendering based on name - simplifying mapping for prototype */}
-                  {item.icon === 'Shop' && <Location color={item.color} size={20} />}
-                  {item.icon === 'People' && <People color={item.color} size={20} />}
-                  {item.icon === 'Star' && <Scan color={item.color} size={20} />} {/* Placeholder for Star */}
-                  {item.icon === 'Cart' && <People color={item.color} size={20} />} {/* Placeholder for Cart */}
-                  {item.icon === 'Share' && <Share color={item.color} size={20} />}
-                </View>
-                <Text className='label'>{item.label}</Text>
-                <Text className='sub-label'>{item.sub}</Text>
-              </View>
-            )
-          })}
+      <View className='content-card'>
+        {/* User Strip */}
+        <View className='user-strip'>
+          <Image className='avatar' src={user.avatar} mode='aspectFill' />
+          <Text className='user-name'>{user.nickname}</Text>
+          <View className='coins'>
+            <Text className='coins-val'>500</Text>
+            <Text className='coins-unit'>水币</Text>
+          </View>
         </View>
 
-        {/* 3. Recommended Station with Quality Dashboard (Updated) */}
-        {recommendedDevice && (
-          <View className='rec-station-card' onClick={() => handleNav('/pages/device/index')}>
-            <View className='card-header'>
-              <View className='left'>
-                <Text className='tag'>最近常去</Text>
-                <Text className='name'>{recommendedDevice.name}</Text>
-              </View>
-              <Text className='distance'>{recommendedDevice.location?.distance}km</Text>
-            </View>
-
-            {/* Water Quality Dashboard */}
-            <View className='quality-dashboard'>
-              <View className='metric'>
-                <Text className='val'>{recommendedDevice.waterQuality?.tds}</Text>
-                <Text className='unit'>TDS</Text>
-              </View>
-              <View className='divider' />
-              <View className='metric'>
-                <Text className='val'>{recommendedDevice.waterQuality?.temp}°C</Text>
-                <Text className='unit'>水温</Text>
-              </View>
-              <View className='divider' />
-              <View className='metric'>
-                <Text className='val'>{recommendedDevice.waterQuality?.turbidity}</Text>
-                <Text className='unit'>浊度</Text>
-              </View>
-
-              <View className='eval-badge'>
-                <Text>水质{recommendedDevice.waterQuality?.eval}</Text>
-              </View>
+        {/* Nearby Stations */}
+        {devices.length > 0 && (
+          <View className='nearby-section'>
+            <Text className='section-title'>附近水站</Text>
+            <View className='station-list'>
+              {devices.slice(0, 3).map((device) => {
+                const statusInfo = getStatusInfo((device as any).status)
+                return (
+                  <View
+                    key={device.id}
+                    className='station-item'
+                    onClick={() => handleNav('/pages/device/index')}
+                  >
+                    <View className='station-main'>
+                      <Text className='station-name'>{device.name}</Text>
+                      <View className={`status-badge ${statusInfo.className}`}>
+                        <Text>{statusInfo.label}</Text>
+                      </View>
+                    </View>
+                    <Text className='station-distance'>距您{device.location?.distance}km</Text>
+                  </View>
+                )
+              })}
             </View>
           </View>
         )}
 
-        {/* 4. Primary Operations Buttons */}
-        <View className='primary-operations'>
-          <Button className='main-btn scan-btn' onClick={handleScan}>
-            <Scan size={24} style={{ marginRight: 8 }} />
-            <Text>扫码取水</Text>
-          </Button>
-
-          <Button className='main-btn manual-btn' onClick={() => handleNav('/pages/device/input')}>
-            <Text>设备号取水</Text>
-          </Button>
-        </View>
+        {/* Primary Operations */}
+        <Button className='scan-btn' onClick={handleScan}>
+          <Scan size={22} style={{ marginRight: 8 }} />
+          <Text>扫码取水</Text>
+        </Button>
+        <Button className='device-btn' onClick={() => handleNav('/pages/device/input')}>
+          <View className='device-icon' />
+          <Text>设备号取水</Text>
+        </Button>
       </View>
 
       <CustomTabBar

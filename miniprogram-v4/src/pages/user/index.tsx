@@ -23,6 +23,10 @@ export default function UserCenter() {
         Taro.navigateTo({ url: path })
     }
 
+    const handleMaintenance = (label: string) => {
+        Taro.showToast({ title: `${label}建设中`, icon: 'none' })
+    }
+
     return (
         <View className='page-user'>
             {/* Dark Blue Header Background */}
@@ -120,6 +124,47 @@ export default function UserCenter() {
                     <View className='icon-box'><Star size={20} color='#333' /></View>
                     <Text className='label'>审批管理</Text>
                     <Text className='arrow'>{'>'}</Text>
+                </View>
+                <View className='maintenance-panel'>
+                    <View className='panel-title'>
+                        <Text>远程维护</Text>
+                        <Text className='panel-subtitle'>调试员专属</Text>
+                    </View>
+                    <View className='water-quality-card'>
+                        <Text className='card-title'>实时水质</Text>
+                        <View className='quality-grid'>
+                            <View className='quality-item'>
+                                <Text className='quality-value'>12</Text>
+                                <Text className='quality-label'>TDS值</Text>
+                            </View>
+                            <View className='quality-item'>
+                                <Text className='quality-value'>25.5°C</Text>
+                                <Text className='quality-label'>水温</Text>
+                            </View>
+                            <View className='quality-item'>
+                                <Text className='quality-value'>EXCELLENT</Text>
+                                <Text className='quality-label'>状态</Text>
+                            </View>
+                        </View>
+                    </View>
+                    <View className='maintenance-actions'>
+                        <View className='action-card' onClick={() => handleMaintenance('远程校准')}>
+                            <View className='action-icon' />
+                            <Text className='action-label'>远程校准</Text>
+                        </View>
+                        <View className='action-card' onClick={() => handleMaintenance('重启设备')}>
+                            <View className='action-icon' />
+                            <Text className='action-label'>重启设备</Text>
+                        </View>
+                        <View className='action-card' onClick={() => handleMaintenance('修改定价')}>
+                            <View className='action-icon' />
+                            <Text className='action-label'>修改定价</Text>
+                        </View>
+                        <View className='action-card' onClick={() => handleMaintenance('暂停服务')}>
+                            <View className='action-icon' />
+                            <Text className='action-label'>暂停服务</Text>
+                        </View>
+                    </View>
                 </View>
                 <View className='menu-item' onClick={() => handleNav('/pages/partner/rental/index')}>
                     <View className='icon-box'><Cart size={20} color='#333' /></View>

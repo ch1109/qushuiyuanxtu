@@ -8,6 +8,8 @@ export default defineAppConfig({
     'pages/partner/dashboard',
     'pages/partner/apply',
     'pages/partner/ai/index',
+    'pages/partner/promo-users/index',
+    'pages/partner/red-packet/index',
     'pages/partner/group/index',
     'pages/partner/device/index',
     'pages/partner/device/detail',

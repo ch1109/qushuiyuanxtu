@@ -25,3 +25,4 @@ node_modules/
 
 # Local dev logs
 miniprogram-v4/.dev-h5.log
+miniprogram-v4/dev-h5.log

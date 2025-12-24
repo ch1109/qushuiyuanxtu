@@ -140,9 +140,24 @@ $card-radius: 10px;
                         background: rgba(114, 46, 209, 0.1);
                     }
 
+                    &.lucky {
+                        color: #722ED1;
+                        background: rgba(114, 46, 209, 0.1);
+                    }
+
                     &.ai {
                         color: #F53F3F;
                         background: rgba(245, 63, 63, 0.1);
+                    }
+
+                    &.sell {
+                        color: #1D7A5E;
+                        background: rgba(29, 122, 94, 0.12);
+                    }
+
+                    &.packet {
+                        color: #F53F3F;
+                        background: rgba(245, 63, 63, 0.12);
                     }
                 }
 
